@@ -1,0 +1,38 @@
+*** Parent to child Communication using @Input***
+//in app component ts
+public message = 'Message from Parent';
+// in app html
+<app-child [childMessage] = "message" ></app-child>
+// in child component .ts
+ @Input() childMessage: any;
+ ngOnInit()  {
+    console.log(this.childMessage);
+  }
+//in child component html
+  {{childMessage}}
+
+*** Child to Parent communication ***
+Parent -> child(@Input)
+Child  -> parent (@ViewChild)
+Child -> parent (@Output) EventEmitters
+child <-> Parent via with service
+
+
+//in app component
+export class AppComponent implements AfterViewInit {
+
+  @ViewChild(ChildComponent, {static: false}) child;
+  //child is a user defined variable
+
+  constructor() { }
+
+  ngAfterViewInit() {
+    console.log(this.child.childtoparent);
+  }
+}
+// in app.html
+Child message : {{child?.childtoparent}}
+// in child.ts
+public childtoparent = 'I am from child component';
+// in child.html
+  {{childMessage}}
